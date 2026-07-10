@@ -197,10 +197,22 @@
                 const seenDex = new Set();
 
                 dataArray.forEach(p => {
-                    const dexNum = p.dex || p.id || p.pokemonId;
-                    const rawName = p.pokemonName || p.name || p.formId || 'Unknown';
+                    // Update: Look for 'dexNr' and 'names.English' based on this specific API
+                    const dexNum = p.dexNr || p.dex || (typeof p.id === 'number' ? p.id : null) || p.pokemonId;
                     
-                    if (typeof dexNum === 'number' && dexNum > 0 && !seenDex.has(dexNum)) {
+                    let rawName = 'Unknown';
+                    if (p.names && p.names.English) {
+                        rawName = p.names.English;
+                    } else if (p.pokemonName) {
+                        rawName = p.pokemonName;
+                    } else if (p.name) {
+                        rawName = p.name;
+                    } else if (typeof p.id === 'string') {
+                        rawName = p.id;
+                    }
+                    
+                    // Only add if it has a valid dex number and we haven't added it yet
+                    if (dexNum && typeof dexNum === 'number' && dexNum > 0 && !seenDex.has(dexNum)) {
                         seenDex.add(dexNum);
                         
                         const cleanName = rawName
