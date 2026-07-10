@@ -14,23 +14,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom scrollbar for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Hide scrollbar for filter container but allow swipe */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 pb-20 min-h-screen flex flex-col">
@@ -49,35 +41,50 @@
 
     <div id="app-content" class="hidden flex-col">
         <!-- Sticky Header -->
-        <header class="sticky top-0 z-20 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    
-                    <!-- Title and Progress Text -->
-                    <div class="flex-1">
-                        <h1 class="text-2xl font-black text-slate-800 tracking-tight flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm">
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <!-- Title and Category Selector -->
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <h1 class="text-2xl font-black text-slate-800 tracking-tight flex items-center gap-2 shrink-0">
+                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm shadow-inner">
                                 GO
                             </div>
-                            Completion Tracker
+                            Tracker
                         </h1>
-                        <div class="mt-2 flex items-center gap-3">
-                            <span class="text-sm font-semibold text-slate-500">
-                                Caught: <span id="caught-count" class="text-slate-800">0</span> / <span id="total-count">0</span>
-                            </span>
-                            <span id="progress-percentage-text" class="text-sm font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
-                                0%
-                            </span>
+                        
+                        <!-- Global Category Tracking Dropdown -->
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-slate-500 font-medium hidden sm:inline">Tracking:</span>
+                            <select id="tracking-category" class="bg-slate-100 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2 font-bold cursor-pointer outline-none transition-colors hover:bg-slate-200">
+                                <option value="regular">Catch (Regular)</option>
+                                <option value="shiny">✨ Shiny</option>
+                                <option value="hundo">💯 100% IV</option>
+                                <option value="lucky">🍀 Lucky</option>
+                                <option value="xxl">🐘 XXL</option>
+                                <option value="xxs">🐁 XXS</option>
+                                <option value="shadow">😈 Shadow</option>
+                                <option value="purified">🕊️ Purified</option>
+                                <option value="mega">🧬 Mega</option>
+                            </select>
                         </div>
                     </div>
 
                     <!-- Progress Bar Visual -->
-                    <div class="w-full md:w-1/3 bg-slate-200 rounded-full h-3 overflow-hidden">
-                        <div id="progress-bar-fill" class="bg-gradient-to-r from-green-400 to-emerald-500 h-3 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                    <div class="w-full md:w-1/3 flex flex-col gap-1">
+                        <div class="flex justify-between items-center text-sm font-semibold">
+                            <span class="text-slate-500">
+                                <span id="caught-count" class="text-slate-800">0</span> / <span id="total-count">0</span>
+                            </span>
+                            <span id="progress-percentage-text" class="text-blue-600">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                            <div id="progress-bar-fill" class="bg-blue-500 h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Controls: Search and Filters -->
                 <div class="mt-4 flex flex-col sm:flex-row gap-3">
                     <div class="relative flex-1">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,15 +93,12 @@
                         <input
                             type="text"
                             id="search-input"
-                            placeholder="Search by name or number..."
+                            placeholder="Search Pokemon..."
                             class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-transparent rounded-lg focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors text-slate-700 placeholder-slate-400 outline-none"
                         />
                     </div>
                     
-                    <div class="flex items-center gap-2 p-1 bg-slate-100 rounded-lg overflow-x-auto" id="filter-buttons">
-                        <svg class="w-4 h-4 ml-2 text-slate-400 hidden sm:block shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                        </svg>
+                    <div class="flex items-center gap-2 p-1 bg-slate-100 rounded-lg overflow-x-auto no-scrollbar" id="filter-buttons">
                         <button data-filter="all" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-blue-600 shadow-sm shrink-0">All</button>
                         <button data-filter="caught" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">Caught</button>
                         <button data-filter="missing" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">Missing</button>
@@ -106,39 +110,48 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
             
             <!-- Bulk Action Context Menu -->
-            <div id="bulk-actions" class="hidden mb-4 items-center justify-between bg-blue-50 p-3 rounded-lg border border-blue-100">
-                <span id="results-count" class="text-sm text-blue-800 font-medium"></span>
-                <div class="flex gap-2">
-                    <button id="mark-all-btn" class="text-xs font-semibold bg-white border border-blue-200 text-blue-600 px-3 py-1.5 rounded hover:bg-blue-100 transition-colors">
-                        Mark All Caught
-                    </button>
-                </div>
+            <div id="bulk-actions" class="hidden mb-4 items-center justify-between bg-white border border-slate-200 p-3 rounded-lg shadow-sm">
+                <span id="results-count" class="text-sm text-slate-600 font-medium"></span>
+                <button id="mark-all-btn" class="text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 px-3 py-1.5 rounded hover:bg-slate-200 transition-colors">
+                    Mark All
+                </button>
             </div>
 
             <div id="empty-state" class="hidden text-center py-20">
                 <div class="inline-block p-6 bg-white rounded-full shadow-sm mb-4">
-                    <svg class="w-10 h-10 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
+                    <span class="text-4xl">🔍</span>
                 </div>
                 <h2 class="text-xl font-semibold text-slate-700">No Pokémon found</h2>
                 <p class="text-slate-500 mt-1">Try adjusting your search or filters.</p>
             </div>
 
             <!-- Pokemon Grid -->
-            <div id="pokemon-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <div id="pokemon-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
                 <!-- Javascript will inject cards here -->
             </div>
         </main>
     </div>
 
     <script>
-        // State
+        // State Management
         let pokemonList = [];
         let filteredList = [];
-        let caughtIds = new Set();
+        
+        // userData structure: { id: { regular: true, shiny: false, hundo: true, ... } }
+        let userProgress = {}; 
+        
         let searchTerm = '';
         let filterMode = 'all';
+        let trackingCategory = 'regular'; // What the top progress bar is tracking
+
+        // Hardcoded list of Mega-eligible Pokedex Numbers (up to recent releases)
+        // Used to only show the "Mega" toggle on Pokemon that actually have one.
+        const megaEligibleIds = new Set([
+            3, 6, 9, 15, 18, 65, 80, 94, 115, 127, 130, 142, 150, 181, 208, 
+            212, 214, 229, 248, 254, 257, 260, 282, 302, 303, 306, 308, 310, 
+            319, 323, 334, 354, 359, 362, 373, 376, 380, 381, 382, 383, 384, 
+            428, 445, 448, 460, 475, 531, 719
+        ]);
 
         // DOM Elements
         const elLoading = document.getElementById('loading-state');
@@ -154,76 +167,65 @@
         const elProgressText = document.getElementById('progress-percentage-text');
         const elProgressBar = document.getElementById('progress-bar-fill');
         const elResultsCount = document.getElementById('results-count');
+        const elMarkAllBtn = document.getElementById('mark-all-btn');
+        const elTrackingSelect = document.getElementById('tracking-category');
 
-        // Initialize Local Storage
         function loadProgress() {
             try {
-                const saved = localStorage.getItem('pogo-tracker-caught');
-                if (saved) {
-                    caughtIds = new Set(JSON.parse(saved));
+                const multiSaved = localStorage.getItem('pogo-tracker-multi');
+                if (multiSaved) {
+                    userProgress = JSON.parse(multiSaved);
+                    return;
+                }
+
+                // Legacy Migration: If user used the previous version of this app
+                const legacySaved = localStorage.getItem('pogo-tracker-caught');
+                if (legacySaved) {
+                    const parsed = JSON.parse(legacySaved);
+                    parsed.forEach(id => {
+                        userProgress[id] = { regular: true };
+                    });
+                    saveProgress(); // Immediately save in new format
                 }
             } catch (e) {
-                console.warn('Failed to load progress from localStorage', e);
+                console.warn('Failed to load progress', e);
+                userProgress = {};
             }
         }
 
         function saveProgress() {
             try {
-                localStorage.setItem('pogo-tracker-caught', JSON.stringify(Array.from(caughtIds)));
+                localStorage.setItem('pogo-tracker-multi', JSON.stringify(userProgress));
             } catch (e) {
-                console.warn('Failed to save progress to localStorage', e);
+                console.warn('Failed to save progress', e);
             }
         }
 
         async function fetchPokedex() {
             try {
                 const response = await fetch('https://pokemon-go-api.github.io/pokemon-go-api/api/pokedex.json');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const rawData = await response.json();
                 
-                let dataArray = [];
-                if (Array.isArray(rawData)) {
-                    dataArray = rawData;
-                } else if (typeof rawData === 'object' && rawData !== null) {
-                    const foundArray = Object.values(rawData).find(val => Array.isArray(val));
-                    if (foundArray) dataArray = foundArray;
-                }
+                let dataArray = Array.isArray(rawData) ? rawData : 
+                    (Object.values(rawData).find(val => Array.isArray(val)) || []);
 
                 const uniquePokemon = [];
                 const seenDex = new Set();
 
                 dataArray.forEach(p => {
-                    // Update: Look for 'dexNr' and 'names.English' based on this specific API
-                    const dexNum = p.dexNr || p.dex || (typeof p.id === 'number' ? p.id : null) || p.pokemonId;
+                    const dexNum = p.dexNr || p.dex || p.id || p.pokemonId;
+                    let rawName = p.names?.English || p.pokemonName || p.name || 'Unknown';
                     
-                    let rawName = 'Unknown';
-                    if (p.names && p.names.English) {
-                        rawName = p.names.English;
-                    } else if (p.pokemonName) {
-                        rawName = p.pokemonName;
-                    } else if (p.name) {
-                        rawName = p.name;
-                    } else if (typeof p.id === 'string') {
-                        rawName = p.id;
-                    }
-                    
-                    // Only add if it has a valid dex number and we haven't added it yet
                     if (dexNum && typeof dexNum === 'number' && dexNum > 0 && !seenDex.has(dexNum)) {
                         seenDex.add(dexNum);
-                        
-                        const cleanName = rawName
-                            .replace(/_/g, ' ')
-                            .toLowerCase()
-                            .replace(/\b\w/g, l => l.toUpperCase());
+                        const cleanName = rawName.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
 
                         uniquePokemon.push({
                             id: dexNum,
                             name: cleanName,
-                            imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dexNum}.png`
+                            imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dexNum}.png`,
+                            hasMega: megaEligibleIds.has(dexNum)
                         });
                     }
                 });
@@ -231,7 +233,6 @@
                 uniquePokemon.sort((a, b) => a.id - b.id);
                 pokemonList = uniquePokemon;
                 
-                // Switch UI from loading to app
                 elLoading.classList.add('hidden');
                 elApp.classList.remove('hidden');
                 elApp.classList.add('flex');
@@ -243,65 +244,129 @@
                 elLoading.classList.add('hidden');
                 elError.classList.remove('hidden');
                 elError.classList.add('flex');
-                document.getElementById('error-message').textContent = "Failed to load Pokedex data. Please check your connection or the API URL.";
+                document.getElementById('error-message').textContent = "Failed to load Pokedex data.";
             }
         }
 
+        // Determines the theme of the active tracking category
+        const themeColors = {
+            regular:  { bar: 'bg-green-500',   text: 'text-green-600',   cardBg: 'bg-green-50',   cardBorder: 'border-green-400',   iconBg: 'bg-green-500' },
+            shiny:    { bar: 'bg-yellow-400',  text: 'text-yellow-600',  cardBg: 'bg-yellow-50',  cardBorder: 'border-yellow-400',  iconBg: 'bg-yellow-500' },
+            hundo:    { bar: 'bg-red-500',     text: 'text-red-600',     cardBg: 'bg-red-50',     cardBorder: 'border-red-400',     iconBg: 'bg-red-500' },
+            lucky:    { bar: 'bg-orange-400',  text: 'text-orange-600',  cardBg: 'bg-orange-50',  cardBorder: 'border-orange-400',  iconBg: 'bg-orange-500' },
+            xxl:      { bar: 'bg-blue-500',    text: 'text-blue-600',    cardBg: 'bg-blue-50',    cardBorder: 'border-blue-400',    iconBg: 'bg-blue-500' },
+            xxs:      { bar: 'bg-cyan-500',    text: 'text-cyan-600',    cardBg: 'bg-cyan-50',    cardBorder: 'border-cyan-400',    iconBg: 'bg-cyan-500' },
+            shadow:   { bar: 'bg-purple-600',  text: 'text-purple-600',  cardBg: 'bg-purple-50',  cardBorder: 'border-purple-400',  iconBg: 'bg-purple-600' },
+            purified: { bar: 'bg-teal-400',    text: 'text-teal-600',    cardBg: 'bg-teal-50',    cardBorder: 'border-teal-400',    iconBg: 'bg-teal-500' },
+            mega:     { bar: 'bg-fuchsia-500', text: 'text-fuchsia-600', cardBg: 'bg-fuchsia-50', cardBorder: 'border-fuchsia-400', iconBg: 'bg-fuchsia-500' }
+        };
+
         function updateProgressUI() {
-            const totalAvailable = pokemonList.length;
-            const totalCaught = caughtIds.size;
+            let totalAvailable = 0;
+            let totalCaught = 0;
+
+            pokemonList.forEach(p => {
+                // If tracking mega, only count Pokemon that actually have a mega evolution
+                if (trackingCategory === 'mega' && !p.hasMega) return;
+                
+                totalAvailable++;
+                if (userProgress[p.id] && userProgress[p.id][trackingCategory]) {
+                    totalCaught++;
+                }
+            });
+
             const percentage = totalAvailable > 0 ? Math.round((totalCaught / totalAvailable) * 100) : 0;
+            const theme = themeColors[trackingCategory] || themeColors.regular;
 
             elCaughtCount.textContent = totalCaught;
             elTotalCount.textContent = totalAvailable;
             elProgressText.textContent = `${percentage}%`;
+            
+            // Apply Dynamic Colors to progress bar
+            elProgressBar.className = `${theme.bar} h-2.5 rounded-full transition-all duration-500 ease-out`;
             elProgressBar.style.width = `${percentage}%`;
+            elProgressText.className = `font-bold ${theme.text}`;
+            
+            elMarkAllBtn.textContent = `Mark All ${elTrackingSelect.options[elTrackingSelect.selectedIndex].text.split(' ').pop()}`;
         }
 
-        function createPokemonCard(pokemon, isCaught) {
-            // Using template literals to create the HTML string for performance
-            const paddedId = String(pokemon.id).padStart(3, '0');
-            const bgClasses = isCaught 
-                ? 'bg-gradient-to-b from-white to-green-50 border-2 border-green-400 shadow-[0_4px_12px_rgba(74,222,128,0.15)] scale-[1.02] sm:scale-100 sm:hover:scale-105' 
-                : 'bg-white border-2 border-transparent shadow-sm hover:shadow-md hover:border-slate-200 hover:-translate-y-1';
+        // Helper to generate an individual attribute chip
+        function createChip(id, type, emoji, tooltip, isActive, labelText = null) {
+            const activeClasses = isActive 
+                ? 'bg-slate-700 text-white border-slate-700 shadow-inner' 
+                : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50';
             
-            const badgeClasses = isCaught ? 'text-green-700 bg-green-100' : 'text-slate-400 bg-slate-100';
-            const imgClasses = isCaught ? 'filter-none scale-110' : 'grayscale-[80%] opacity-70 group-hover:grayscale-0 group-hover:opacity-100';
-            const textClasses = isCaught ? 'text-slate-800' : 'text-slate-500 group-hover:text-slate-800';
+            const content = labelText 
+                ? `<span class="text-[9px] font-black tracking-tighter">${labelText}</span>`
+                : `<span class="text-[14px] leading-none">${emoji}</span>`;
+
+            return `
+                <button data-type="${type}" title="${tooltip}" class="attribute-toggle w-full aspect-square rounded-md flex items-center justify-center border transition-all ${activeClasses}">
+                    ${content}
+                </button>
+            `;
+        }
+
+        function createPokemonCard(pokemon) {
+            const pState = userProgress[pokemon.id] || {};
+            const isTrackingActive = !!pState[trackingCategory];
+            const theme = themeColors[trackingCategory] || themeColors.regular;
+
+            // Main visual styling depends on the currently tracked category
+            const cardOutlineClasses = isTrackingActive 
+                ? `${theme.cardBorder} shadow-md scale-[1.01]` 
+                : 'border-transparent shadow-sm hover:shadow hover:-translate-y-0.5';
+                
+            const headerBgClasses = isTrackingActive ? theme.cardBg : 'bg-white';
+            const imgClasses = isTrackingActive ? 'filter-none scale-110' : 'grayscale-[60%] opacity-80 group-hover:grayscale-0 group-hover:opacity-100';
             
-            const checkIcon = isCaught ? `
-                <div class="absolute top-2 right-2 bg-green-500 text-white p-1 rounded-full shadow-sm animate-[bounce_0.3s_ease-out_1]">
+            const checkIcon = isTrackingActive ? `
+                <div class="absolute top-2 right-2 ${theme.iconBg} text-white p-1 rounded-full shadow-sm">
                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
             ` : '';
 
-            // Note: fallback image logic is handled directly in the onerror attribute
+            // 8 Slot Grid for Attributes
+            const chipsHtml = `
+                ${createChip(pokemon.id, 'shiny', '✨', 'Shiny', pState.shiny)}
+                ${createChip(pokemon.id, 'hundo', '💯', '100% IV', pState.hundo)}
+                ${createChip(pokemon.id, 'lucky', '🍀', 'Lucky', pState.lucky)}
+                ${createChip(pokemon.id, 'shadow', '😈', 'Shadow', pState.shadow)}
+                ${createChip(pokemon.id, 'xxl', '', 'XXL', pState.xxl, 'XXL')}
+                ${createChip(pokemon.id, 'xxs', '', 'XXS', pState.xxs, 'XXS')}
+                ${createChip(pokemon.id, 'purified', '🕊️', 'Purified', pState.purified)}
+                ${pokemon.hasMega 
+                    ? createChip(pokemon.id, 'mega', '🧬', 'Mega Evolution', pState.mega) 
+                    : `<div class="w-full aspect-square bg-transparent"></div>` // Empty placeholder to maintain grid
+                }
+            `;
+
             return `
-                <div 
-                    data-id="${pokemon.id}"
-                    class="pokemon-card relative group cursor-pointer rounded-2xl p-4 flex flex-col items-center transition-all duration-200 select-none overflow-hidden ${bgClasses}"
-                >
-                    <div class="absolute top-2 left-2 text-xs font-black px-1.5 py-0.5 rounded ${badgeClasses}">
-                        #${paddedId}
-                    </div>
+                <div data-id="${pokemon.id}" class="pokemon-card group relative bg-white border-2 rounded-xl flex flex-col overflow-hidden transition-all duration-200 select-none ${cardOutlineClasses}">
                     
-                    ${checkIcon}
+                    <!-- Main Clickable Area (Toggles the specific dropdown category) -->
+                    <div class="main-toggle cursor-pointer flex flex-col items-center p-3 relative flex-1 ${headerBgClasses}">
+                        <div class="absolute top-2 left-2 text-[10px] font-black px-1.5 py-0.5 rounded ${isTrackingActive ? 'text-slate-700 bg-black/10' : 'text-slate-400 bg-slate-100'}">
+                            #${String(pokemon.id).padStart(3, '0')}
+                        </div>
+                        
+                        ${checkIcon}
 
-                    <div class="w-24 h-24 mt-2 mb-3 relative flex items-center justify-center">
-                        <img
-                            src="${pokemon.imageUrl}"
-                            alt="${pokemon.name}"
-                            loading="lazy"
-                            class="max-w-full max-h-full object-contain drop-shadow-sm transition-all duration-300 ${imgClasses}"
-                            onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png';"
-                        />
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 mt-3 mb-2 relative flex items-center justify-center">
+                            <img src="${pokemon.imageUrl}" alt="${pokemon.name}" loading="lazy" class="max-w-full max-h-full object-contain drop-shadow-sm transition-all duration-300 ${imgClasses}" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png';"/>
+                        </div>
+
+                        <h3 class="text-xs sm:text-sm font-bold text-center w-full truncate px-1 text-slate-700">
+                            ${pokemon.name}
+                        </h3>
                     </div>
 
-                    <h3 class="text-sm font-bold text-center w-full truncate px-1 transition-colors ${textClasses}">
-                        ${pokemon.name}
-                    </h3>
+                    <!-- 4x2 Attribute Grid -->
+                    <div class="grid grid-cols-4 gap-1 p-1.5 bg-slate-100 border-t border-slate-200 shrink-0">
+                        ${chipsHtml}
+                    </div>
                 </div>
             `;
         }
@@ -316,8 +381,7 @@
 
             elEmptyState.classList.add('hidden');
             
-            // Show bulk actions if filtering or searching
-            if (searchTerm || filterMode !== 'all') {
+            if (searchTerm || filterMode !== 'all' || trackingCategory !== 'regular') {
                 elBulkActions.classList.remove('hidden');
                 elBulkActions.classList.add('flex');
                 elResultsCount.textContent = `Showing ${filteredList.length} results`;
@@ -326,23 +390,26 @@
                 elBulkActions.classList.remove('flex');
             }
 
-            // Build HTML efficiently
-            const htmlStr = filteredList.map(p => createPokemonCard(p, caughtIds.has(p.id))).join('');
-            elGrid.innerHTML = htmlStr;
+            elGrid.innerHTML = filteredList.map(p => createPokemonCard(p)).join('');
         }
 
         function applyFiltersAndSearch() {
             const term = searchTerm.toLowerCase();
             
             filteredList = pokemonList.filter(pokemon => {
-                // Search
+                // 1. If tracking mega globally, filter out non-megas to keep list clean
+                if (trackingCategory === 'mega' && !pokemon.hasMega) return false;
+
+                // 2. Search
                 const matchesSearch = pokemon.name.toLowerCase().includes(term) || pokemon.id.toString().includes(term);
                 if (!matchesSearch) return false;
 
-                // Filter
-                const isCaught = caughtIds.has(pokemon.id);
-                if (filterMode === 'caught' && !isCaught) return false;
-                if (filterMode === 'missing' && isCaught) return false;
+                // 3. Status Filter (All/Caught/Missing) -> relies on currently tracked category
+                if (filterMode !== 'all') {
+                    const hasAttribute = userProgress[pokemon.id] && userProgress[pokemon.id][trackingCategory];
+                    if (filterMode === 'caught' && !hasAttribute) return false;
+                    if (filterMode === 'missing' && hasAttribute) return false;
+                }
 
                 return true;
             });
@@ -351,66 +418,75 @@
             updateProgressUI();
         }
 
-        function togglePokemon(id) {
-            if (caughtIds.has(id)) {
-                caughtIds.delete(id);
-            } else {
-                caughtIds.add(id);
-            }
+        function toggleAttribute(id, attributeKey) {
+            if (!userProgress[id]) userProgress[id] = {};
+            userProgress[id][attributeKey] = !userProgress[id][attributeKey];
             saveProgress();
-            
-            // If we are filtering, we need to re-evaluate the list
-            // Otherwise, we could just update the specific DOM node for speed, 
-            // but re-rendering the filtered list is safer and keeps UI in sync easily.
             applyFiltersAndSearch(); 
         }
 
-        // Event Delegation for clicking cards
+        // Event Delegation for clicking elements inside the grid
         elGrid.addEventListener('click', (e) => {
-            const card = e.target.closest('.pokemon-card');
-            if (card) {
+            // Did they click a mini attribute chip?
+            const attrBtn = e.target.closest('.attribute-toggle');
+            if (attrBtn) {
+                e.stopPropagation(); // prevent main card click
+                const card = attrBtn.closest('.pokemon-card');
                 const id = parseInt(card.dataset.id, 10);
-                togglePokemon(id);
+                const type = attrBtn.dataset.type;
+                toggleAttribute(id, type);
+                return;
+            }
+
+            // Did they click the main card area?
+            const mainToggle = e.target.closest('.main-toggle');
+            if (mainToggle) {
+                const card = mainToggle.closest('.pokemon-card');
+                const id = parseInt(card.dataset.id, 10);
+                // The main card area always toggles the active tracking category!
+                toggleAttribute(id, trackingCategory);
             }
         });
 
-        // Search Input
+        // Top Category Dropdown Listener
+        elTrackingSelect.addEventListener('change', (e) => {
+            trackingCategory = e.target.value;
+            applyFiltersAndSearch();
+        });
+
+        // Search Input Listener
         document.getElementById('search-input').addEventListener('input', (e) => {
             searchTerm = e.target.value;
             applyFiltersAndSearch();
         });
 
-        // Filter Buttons
+        // Filter Buttons Listeners
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Update active state visuals
                 document.querySelectorAll('.filter-btn').forEach(b => {
                     b.className = "filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0";
                 });
-                
                 e.target.className = "filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-blue-600 shadow-sm shrink-0";
-                
                 filterMode = e.target.dataset.filter;
                 applyFiltersAndSearch();
             });
         });
 
-        // Mark All Caught Button
-        document.getElementById('mark-all-btn').addEventListener('click', () => {
-            filteredList.forEach(p => caughtIds.add(p.id));
+        // Mark All Actions
+        elMarkAllBtn.addEventListener('click', () => {
+            filteredList.forEach(p => {
+                if (!userProgress[p.id]) userProgress[p.id] = {};
+                userProgress[p.id][trackingCategory] = true;
+            });
             saveProgress();
             applyFiltersAndSearch();
         });
 
-        // App Initialization
-        function init() {
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
             loadProgress();
             fetchPokedex();
-        }
-
-        // Start the app when DOM is ready
-        document.addEventListener('DOMContentLoaded', init);
-
+        });
     </script>
 </body>
 </html>
