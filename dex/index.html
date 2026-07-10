@@ -312,21 +312,37 @@
             const isTrackingActive = !!pState[trackingCategory];
             const theme = themeColors[trackingCategory] || themeColors.regular;
 
-            // Main visual styling depends on the currently tracked category
-            const cardOutlineClasses = isTrackingActive 
-                ? `${theme.cardBorder} shadow-md scale-[1.01]` 
-                : 'border-transparent shadow-sm hover:shadow hover:-translate-y-0.5';
+            // Check for Mastery (100% completion of all available attributes)
+            const requiredKeys = ['regular', 'shiny', 'hundo', 'lucky', 'shadow', 'purified', 'xxl', 'xxs'];
+            if (pokemon.hasMega) requiredKeys.push('mega');
+            const isMastered = requiredKeys.every(key => pState[key]);
+
+            // Main visual styling depends on mastery and currently tracked category
+            const cardOutlineClasses = isMastered
+                ? 'border-yellow-400 shadow-md shadow-yellow-400/40 scale-[1.02] z-10'
+                : (isTrackingActive 
+                    ? `${theme.cardBorder} shadow-md scale-[1.01]` 
+                    : 'border-transparent shadow-sm hover:shadow hover:-translate-y-0.5');
+                    
+            const headerBgClasses = isMastered
+                ? 'bg-gradient-to-br from-yellow-50 to-amber-100'
+                : (isTrackingActive ? theme.cardBg : 'bg-white');
                 
-            const headerBgClasses = isTrackingActive ? theme.cardBg : 'bg-white';
-            const imgClasses = isTrackingActive ? 'filter-none scale-110' : 'grayscale-[60%] opacity-80 group-hover:grayscale-0 group-hover:opacity-100';
+            const imgClasses = (isTrackingActive || isMastered) 
+                ? 'filter-none scale-110' 
+                : 'grayscale-[60%] opacity-80 group-hover:grayscale-0 group-hover:opacity-100';
             
-            const checkIcon = isTrackingActive ? `
-                <div class="absolute top-2 right-2 ${theme.iconBg} text-white p-1 rounded-full shadow-sm">
+            const badgeIcon = isMastered ? `
+                <div class="absolute -top-2 -right-2 bg-gradient-to-br from-yellow-400 to-amber-500 text-white text-[10px] font-black px-2 py-1 rounded-full shadow-md z-20 border-2 border-white transform rotate-12">
+                    100%
+                </div>
+            ` : (isTrackingActive ? `
+                <div class="absolute top-2 right-2 ${theme.iconBg} text-white p-1 rounded-full shadow-sm z-10">
                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-            ` : '';
+            ` : '');
 
             // 8 Slot Grid for Attributes
             const chipsHtml = `
@@ -348,11 +364,11 @@
                     
                     <!-- Main Clickable Area (Toggles the specific dropdown category) -->
                     <div class="main-toggle cursor-pointer flex flex-col items-center p-3 relative flex-1 ${headerBgClasses}">
-                        <div class="absolute top-2 left-2 text-[10px] font-black px-1.5 py-0.5 rounded ${isTrackingActive ? 'text-slate-700 bg-black/10' : 'text-slate-400 bg-slate-100'}">
+                        <div class="absolute top-2 left-2 text-[10px] font-black px-1.5 py-0.5 rounded ${isTrackingActive || isMastered ? 'text-slate-700 bg-black/10' : 'text-slate-400 bg-slate-100'}">
                             #${String(pokemon.id).padStart(3, '0')}
                         </div>
                         
-                        ${checkIcon}
+                        ${badgeIcon}
 
                         <div class="w-16 h-16 sm:w-20 sm:h-20 mt-3 mb-2 relative flex items-center justify-center">
                             <img src="${pokemon.imageUrl}" alt="${pokemon.name}" loading="lazy" class="max-w-full max-h-full object-contain drop-shadow-sm transition-all duration-300 ${imgClasses}" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png';"/>
@@ -418,11 +434,46 @@
             updateProgressUI();
         }
 
-        function toggleAttribute(id, attributeKey) {
+        function toggleAttribute(id, attributeKey, cardElement = null) {
             if (!userProgress[id]) userProgress[id] = {};
             userProgress[id][attributeKey] = !userProgress[id][attributeKey];
             saveProgress();
-            applyFiltersAndSearch(); 
+            
+            // Fast DOM Update: Replace only the clicked card's HTML to prevent full grid image reloads
+            if (cardElement) {
+                const p = pokemonList.find(x => x.id === id);
+                cardElement.outerHTML = createPokemonCard(p);
+                
+                // Recalculate filteredList quietly to maintain accurate counts for bulk actions
+                const term = searchTerm.toLowerCase();
+                filteredList = pokemonList.filter(pokemon => {
+                    if (trackingCategory === 'mega' && !pokemon.hasMega) return false;
+                    const matchesSearch = pokemon.name.toLowerCase().includes(term) || pokemon.id.toString().includes(term);
+                    if (!matchesSearch) return false;
+                    if (filterMode !== 'all') {
+                        const hasAttribute = userProgress[pokemon.id] && userProgress[pokemon.id][trackingCategory];
+                        if (filterMode === 'caught' && !hasAttribute) return false;
+                        if (filterMode === 'missing' && hasAttribute) return false;
+                    }
+                    return true;
+                });
+                
+                // If the filter dictates this card should no longer be visible, hide it
+                const newCardNode = elGrid.querySelector(`.pokemon-card[data-id="${id}"]`);
+                if (newCardNode) {
+                    const shouldBeVisible = filteredList.some(f => f.id === id);
+                    if (!shouldBeVisible) newCardNode.classList.add('hidden');
+                }
+
+                // Update Progress Bar and Context Menu seamlessly
+                updateProgressUI();
+                if (searchTerm || filterMode !== 'all' || trackingCategory !== 'regular') {
+                    elResultsCount.textContent = `Showing ${filteredList.length} results`;
+                }
+            } else {
+                // Fallback for bulk actions or initialization
+                applyFiltersAndSearch(); 
+            }
         }
 
         // Event Delegation for clicking elements inside the grid
@@ -434,7 +485,7 @@
                 const card = attrBtn.closest('.pokemon-card');
                 const id = parseInt(card.dataset.id, 10);
                 const type = attrBtn.dataset.type;
-                toggleAttribute(id, type);
+                toggleAttribute(id, type, card);
                 return;
             }
 
@@ -444,7 +495,7 @@
                 const card = mainToggle.closest('.pokemon-card');
                 const id = parseInt(card.dataset.id, 10);
                 // The main card area always toggles the active tracking category!
-                toggleAttribute(id, trackingCategory);
+                toggleAttribute(id, trackingCategory, card);
             }
         });
 
