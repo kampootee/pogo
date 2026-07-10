@@ -53,22 +53,6 @@
                             </div>
                             Tracker
                         </h1>
-                        
-                        <!-- Global Category Tracking Dropdown -->
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm text-slate-500 font-medium hidden sm:inline">Tracking:</span>
-                            <select id="tracking-category" class="bg-slate-100 border border-slate-200 text-slate-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-auto p-2 font-bold cursor-pointer outline-none transition-colors hover:bg-slate-200">
-                                <option value="regular">Catch (Regular)</option>
-                                <option value="shiny">✨ Shiny</option>
-                                <option value="hundo">💯 100% IV</option>
-                                <option value="lucky">🍀 Lucky</option>
-                                <option value="xxl">🐘 XXL</option>
-                                <option value="xxs">🐁 XXS</option>
-                                <option value="shadow">😈 Shadow</option>
-                                <option value="purified">🕊️ Purified</option>
-                                <option value="mega">🧬 Mega</option>
-                            </select>
-                        </div>
                     </div>
 
                     <!-- Progress Bar Visual -->
@@ -85,8 +69,8 @@
                     </div>
                 </div>
 
-                <div class="mt-4 flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-1">
+                <div class="mt-4 flex flex-col gap-3">
+                    <div class="relative w-full">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
@@ -98,10 +82,24 @@
                         />
                     </div>
                     
-                    <div class="flex items-center gap-2 p-1 bg-slate-100 rounded-lg overflow-x-auto no-scrollbar" id="filter-buttons">
+                    <div class="flex items-center gap-2 p-1.5 bg-slate-100 rounded-lg overflow-x-auto no-scrollbar w-full" id="filter-and-track-bar">
+                        <!-- Status Filters -->
                         <button data-filter="all" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-blue-600 shadow-sm shrink-0">All</button>
                         <button data-filter="caught" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">Caught</button>
                         <button data-filter="missing" class="filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">Missing</button>
+                        
+                        <div class="w-px h-6 bg-slate-300 mx-1 shrink-0"></div>
+                        
+                        <!-- Tracking Categories -->
+                        <button data-track="regular" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-slate-800 shadow-sm shrink-0">Regular</button>
+                        <button data-track="shiny" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">✨ Shiny</button>
+                        <button data-track="hundo" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">💯 100%</button>
+                        <button data-track="lucky" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">🍀 Lucky</button>
+                        <button data-track="xxl" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">🐘 XXL</button>
+                        <button data-track="xxs" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">🐁 XXS</button>
+                        <button data-track="shadow" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">😈 Shadow</button>
+                        <button data-track="purified" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">🕊️ Purified</button>
+                        <button data-track="mega" class="track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0">🧬 Mega</button>
                     </div>
                 </div>
             </div>
@@ -168,7 +166,6 @@
         const elProgressBar = document.getElementById('progress-bar-fill');
         const elResultsCount = document.getElementById('results-count');
         const elMarkAllBtn = document.getElementById('mark-all-btn');
-        const elTrackingSelect = document.getElementById('tracking-category');
 
         function loadProgress() {
             try {
@@ -287,7 +284,10 @@
             elProgressBar.style.width = `${percentage}%`;
             elProgressText.className = `font-bold ${theme.text}`;
             
-            elMarkAllBtn.textContent = `Mark All ${elTrackingSelect.options[elTrackingSelect.selectedIndex].text.split(' ').pop()}`;
+            // Extract a clean label for the Mark All button
+            const activeTrackBtn = document.querySelector(`.track-btn[data-track="${trackingCategory}"]`);
+            const trackLabel = activeTrackBtn ? activeTrackBtn.textContent.replace(/[^a-zA-Z0-9 %]/g, '').trim() : trackingCategory;
+            elMarkAllBtn.textContent = `Mark All ${trackLabel}`;
         }
 
         // Helper to generate an individual attribute chip
@@ -499,19 +499,13 @@
             }
         });
 
-        // Top Category Dropdown Listener
-        elTrackingSelect.addEventListener('change', (e) => {
-            trackingCategory = e.target.value;
-            applyFiltersAndSearch();
-        });
-
         // Search Input Listener
         document.getElementById('search-input').addEventListener('input', (e) => {
             searchTerm = e.target.value;
             applyFiltersAndSearch();
         });
 
-        // Filter Buttons Listeners
+        // Filter Buttons Listeners (All / Caught / Missing)
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.filter-btn').forEach(b => {
@@ -519,6 +513,18 @@
                 });
                 e.target.className = "filter-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-blue-600 shadow-sm shrink-0";
                 filterMode = e.target.dataset.filter;
+                applyFiltersAndSearch();
+            });
+        });
+
+        // Tracking Category Buttons Listeners (Regular, Shiny, etc.)
+        document.querySelectorAll('.track-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.track-btn').forEach(b => {
+                    b.className = "track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 shrink-0";
+                });
+                e.target.className = "track-btn px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-all bg-white text-slate-800 shadow-sm shrink-0";
+                trackingCategory = e.target.dataset.track;
                 applyFiltersAndSearch();
             });
         });
