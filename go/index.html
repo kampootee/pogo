@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#120829" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Dynamax BG" />
+  <link id="dynamicManifest" rel="manifest" />
+  <link id="appIconLink" rel="icon" type="image/svg+xml" />
+  <link id="appleTouchIconLink" rel="apple-touch-icon" />
+  <title>Dynamax Trails — Special Background Checklist</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font: Inter & Chakra Petch for sleek event header accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Chakra Petch', 'sans-serif'],
+          },
+          colors: {
+            dmax: {
+              dark: '#090712',
+              card: '#131122',
+              purple: '#6d12d6',
+              magenta: '#e6249c',
+              glow: '#ff47b6',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom scrollbar for dark theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090712;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c254a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #55238c;
+    }
+
+    /* Hide scrollbar on horizontal pill container */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Full-Page "Into the Darkness" Deep Indigo -> Vivid Purple/Magenta Swirling Storm Backdrop */
+    .into-darkness-backdrop {
+      background-color: #060312;
+      background-image:
+        /* Deep darkness vignette & horizon grounding */
+        radial-gradient(ellipse 130% 95% at 50% 45%, transparent 38%, rgba(4, 2, 12, 0.88) 100%),
+        linear-gradient(to top, #04020a 0%, rgba(7, 3, 18, 0.72) 22%, transparent 55%),
+        /* Vivid magenta/fuchsia Dynamax energy glow */
+        radial-gradient(ellipse 85% 48% at 68% 64%, rgba(230, 36, 156, 0.42) 0%, rgba(147, 22, 214, 0.24) 45%, transparent 78%),
+        /* Upper swirling violet cloud bank */
+        radial-gradient(ellipse 90% 55% at 32% 24%, rgba(126, 22, 224, 0.52) 0%, rgba(76, 14, 168, 0.28) 52%, transparent 82%),
+        /* Secondary right-side purple vortex */
+        radial-gradient(circle at 82% 28%, rgba(168, 28, 232, 0.38) 0%, transparent 55%),
+        /* Deep midnight royal-indigo base */
+        radial-gradient(ellipse 120% 80% at 50% 0%, #0b0842 0%, #160647 45%, #070314 100%);
+    }
+
+    /* Animated swirling dark cloud tendrils for the full-page backdrop */
+    .into-darkness-swirls {
+      background-image:
+        radial-gradient(ellipse 48% 28% at 24% 26%, rgba(8, 3, 26, 0.86) 0%, transparent 72%),
+        radial-gradient(ellipse 55% 32% at 76% 20%, rgba(6, 2, 22, 0.9) 0%, transparent 74%),
+        radial-gradient(ellipse 46% 26% at 82% 56%, rgba(10, 3, 30, 0.82) 0%, transparent 72%),
+        radial-gradient(ellipse 44% 24% at 18% 68%, rgba(9, 3, 28, 0.84) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 22% at 52% 38%, rgba(217, 70, 239, 0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 36% 20% at 42% 72%, rgba(192, 38, 211, 0.2) 0%, transparent 68%);
+      animation: darknessVortex 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes darknessVortex {
+      0% {
+        transform: scale(1) translate(0px, 0px) rotate(0deg);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.05) translate(-10px, -6px) rotate(0.8deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.08) translate(8px, -10px) rotate(-0.8deg);
+        opacity: 0.94;
+      }
+    }
+
+    /* Recreated Dynamax Special Background Artwork (Deep Indigo -> Vivid Purple/Magenta Storm Clouds + Dark Horizon Bar) */
+    .dynamax-bg-art {
+      background-color: #16063b;
+      background-image:
+        /* Dark ground horizon strip at bottom ~16% matching the event background */
+        linear-gradient(to top, #040308 0%, #040308 16%, rgba(4, 3, 8, 0.85) 17%, transparent 21%),
+        /* Bright magenta/pink horizon energy glow */
+        radial-gradient(ellipse 95% 48% at 62% 82%, rgba(244, 52, 184, 0.92) 0%, rgba(168, 22, 226, 0.72) 42%, transparent 76%),
+        /* Mid-sky swirling purple storm cloud bank */
+        radial-gradient(ellipse 75% 45% at 48% 48%, rgba(178, 30, 245, 0.88) 0%, rgba(102, 14, 189, 0.5) 55%, transparent 80%),
+        /* Left-side violet cloud cluster */
+        radial-gradient(circle at 18% 58%, rgba(139, 28, 232, 0.78) 0%, transparent 55%),
+        /* Deep midnight/royal blue upper sky */
+        radial-gradient(ellipse 110% 60% at 50% 10%, #09094a 0%, #190754 45%, #370987 100%);
+    }
+
+    /* Shadowed storm cloud silhouettes for realistic depth */
+    .dynamax-clouds-overlay {
+      background-image:
+        radial-gradient(ellipse 42% 24% at 28% 32%, rgba(12, 5, 36, 0.82) 0%, transparent 72%),
+        radial-gradient(ellipse 50% 26% at 78% 24%, rgba(10, 4, 32, 0.88) 0%, transparent 74%),
+        radial-gradient(ellipse 38% 20% at 84% 48%, rgba(18, 6, 48, 0.75) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 18% at 15% 22%, rgba(11, 5, 38, 0.8) 0%, transparent 68%),
+        radial-gradient(ellipse 32% 16% at 54% 38%, rgba(235, 92, 255, 0.35) 0%, transparent 70%);
+      animation: stormDrift 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes stormDrift {
+      0% {
+        transform: scale(1) translateY(0px);
+        opacity: 0.92;
+      }
+      100% {
+        transform: scale(1.06) translateY(-3px);
+        opacity: 1;
+      }
+    }
+
+    /* Subtle pulse for collected card border */
+    .collected-card-shadow {
+      box-shadow:
+        0 0 0 1.5px rgba(236, 72, 153, 0.85),
+        0 10px 26px -6px rgba(192, 38, 211, 0.48),
+        inset 0 0 18px rgba(244, 63, 180, 0.28);
+    }
+
+    /* Sprite drop shadow when active on Dynamax background */
+    .sprite-active {
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 8px rgba(244, 114, 182, 0.45));
+      transform: scale(1.06);
+    }
+
+    /* Muted sprite when unchecked */
+    .sprite-muted {
+      filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45)) saturate(0.75) brightness(0.88);
+      transform: scale(1);
+    }
+
+    .pokemon-row:hover .sprite-muted {
+      filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.55)) saturate(0.95) brightness(0.98);
+      transform: scale(1.04);
+    }
+
+    /* Tap feedback for list rows */
+    .pokemon-row:active {
+      transform: scale(0.99);
+    }
+
+    /* Smooth exit/enter transition when moving between Still Needed and Collected */
+    @keyframes rowSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .row-enter {
+      animation: rowSlideIn 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .row-exiting {
+      opacity: 0 !important;
+      transform: translateX(18px) scale(0.97) !important;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-dmax-dark text-slate-100 min-h-screen antialiased selection:bg-pink-500 selection:text-white overflow-x-hidden">
+
+  <!-- Full-Viewport "Into the Darkness" Purple & Magenta Swirling Storm Backdrop -->
+  <div class="fixed inset-0 pointer-events-none z-0 into-darkness-backdrop"></div>
+  <div class="fixed inset-0 pointer-events-none z-0 into-darkness-swirls"></div>
+
+  <!-- Main App Wrapper (Centered List Container max-w-[760px]) -->
+  <div class="relative z-10 max-w-[760px] mx-auto px-3 sm:px-5 pb-24">
+
+    <!-- Top Header & Event Progress -->
+    <header class="pt-4 pb-4 sm:pt-6 sm:pb-5">
+      <div class="relative overflow-hidden rounded-2xl bg-[#120829]/80 backdrop-blur-xl border border-purple-400/30 p-4 sm:p-5 shadow-[0_12px_40px_-10px_rgba(126,34,206,0.55)]">
+        <!-- Subtle Dynamax Cloud Sheen Inside Header -->
+        <div class="absolute inset-0 pointer-events-none opacity-45 dynamax-bg-art"></div>
+        <div class="absolute inset-0 pointer-events-none opacity-55 dynamax-clouds-overlay"></div>
+
+        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <!-- Title & Event Badge -->
+          <div>
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md border border-pink-400/45 text-[11px] font-semibold tracking-wide text-pink-200 mb-1.5">
+              <!-- Dynamax Swirl Icon -->
+              <svg class="w-3.5 h-3.5 text-pink-400 animate-spin" style="animation-duration: 12s;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <path d="M12 3c4.97 0 9 4.03 9 9 0 3.5-2 6.53-4.93 8.03M12 21c-4.97 0-9-4.03-9-9 0-3.5 2-6.53 4.93-8.03" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="3.5" fill="currentColor" class="text-pink-400"/>
+              </svg>
+              <span>MAX BATTLES • NOV 16–23, 2026</span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">
+          <!-- Action Buttons (Install App / Backup / Reset) -->
+          <div class="flex flex-wrap items-center gap-2 self-start sm:self-center shrink-0">
+            <button id="installAppBtn" type="button"
+              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-600/90 to-pink-600/90 hover:from-purple-500 hover:to-pink-500 active:scale-95 text-white border border-pink-300/45 text-xs font-semibold backdrop-blur-md shadow-[0_0_16px_rgba(236,72,153,0.45)] transition cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-pink-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+              </svg>
+              <span id="installAppBtnLabel">Install App</span>
+            </button>
+            <button id="openBackupBtn" type="button"
+              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-black/55 hover:bg-purple-950/80 active:bg-purple-900/80 text-slate-100 border border-purple-400/35 text-xs font-medium backdrop-blur-md transition cursor-pointer">
+              <svg class="w-3.5 h-3.5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+              <span>Backup / Transfer</span>
+            </button>
+            <button id="openResetBtn" type="button"
+              class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-950/65 hover:bg-rose-900/75 active:bg-rose-900/90 text-rose-200 border border-rose-500/40 text-xs font-medium backdrop-blur-md transition cursor-pointer"
+              title="Reset checklist progress">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Progress Bar Section -->
+        <div class="relative z-10 mt-4 pt-3.5 border-t border-purple-300/20">
+          <div class="flex items-center justify-between text-xs mb-1.5">
+            <span class="font-semibold text-purple-100 flex items-center gap-2">
+              <span>Collection Progress</span>
+              <span id="completeBadge" class="hidden px-2 py-0.5 rounded-full text-[10px] font-bold bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow">
+                100% COMPLETE!
+              </span>
+            </span>
+            <span id="progressText" class="font-display font-bold text-pink-200 text-sm drop-shadow">
+              0 / 57 Collected (0%)
+            </span>
+          </div>
+          <div class="w-full h-3 bg-black/75 rounded-full overflow-hidden border border-purple-400/30 p-0.5">
+            <div id="progressBarFill"
+                 class="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-300 ease-out shadow-[0_0_14px_rgba(236,72,153,0.85)]"
+                 style="width: 0%;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Two-Section List Container -->
+    <main id="listsContainer" class="space-y-8">
+
+      <!-- SECTION 1: STILL NEEDED (Active Uncollected List) -->
+      <section id="neededSection" aria-labelledby="neededHeading" class="space-y-2.5">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]"></span>
+            <h2 id="neededHeading" class="font-display text-sm sm:text-base font-bold uppercase tracking-wider text-purple-100">
+              Still Needed
+            </h2>
+          </div>
+          <span id="neededSectionBadge" class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-[#150a30]/85 text-purple-200 border border-purple-400/30 backdrop-blur-sm">
+            57 remaining
+          </span>
+        </div>
+
+        <!-- Celebration banner when all Pokémon are collected -->
+        <div id="allCollectedBanner" class="hidden rounded-2xl bg-gradient-to-r from-purple-950/75 via-pink-950/65 to-[#120829]/85 border border-pink-400/45 p-5 text-center backdrop-blur-md shadow-xl">
+          <p class="font-display text-base sm:text-lg font-bold text-pink-200">All 57 Special Backgrounds Collected!</p>
+          <p class="text-xs text-purple-200/80 mt-1">Scroll down to review or uncheck any Pokémon in your Collected section below.</p>
+        </div>
+
+        <!-- Still Needed List Rows -->
+        <div id="neededList" class="flex flex-col gap-2">
+          <!-- Uncollected rows rendered by JS -->
+        </div>
+      </section>
+
+      <!-- SECTION 2: COLLECTED — SPECIAL BACKGROUND (Bottom Section) -->
+      <section id="collectedSection" aria-labelledby="collectedHeading" class="space-y-2.5 pt-4 border-t border-purple-400/20">
+        <div class="flex items-center justify-between px-1">
+          <button id="toggleCollectedCollapseBtn" type="button" aria-expanded="true"
+            class="flex items-center gap-2 text-left group cursor-pointer focus:outline-none">
+            <span class="w-5 h-5 rounded-md bg-pink-950/85 border border-pink-400/45 flex items-center justify-center text-pink-300 group-hover:bg-pink-900/85 transition">
+              <svg id="collectedChevron" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+            <h2 id="collectedHeading" class="font-display text-sm sm:text-base font-bold uppercase tracking-wider text-pink-300 group-hover:text-pink-200 transition">
+              Collected — Special Background
+            </h2>
+          </button>
+          <span id="collectedSectionBadge" class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-pink-950/85 text-pink-200 border border-pink-400/40 backdrop-blur-sm">
+            0 collected
+          </span>
+        </div>
+
+        <!-- Empty state when 0 collected yet -->
+        <div id="noCollectedPlaceholder" class="rounded-2xl bg-[#100724]/65 backdrop-blur-sm border border-dashed border-purple-400/25 p-5 text-center text-xs text-purple-200/60">
+          No Special Backgrounds checked yet — tap any Pokémon above as you catch them!
+        </div>
+
+        <!-- Collected List Rows -->
+        <div id="collectedList" class="flex flex-col gap-2">
+          <!-- Collected rows rendered by JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Note -->
+    <footer class="mt-12 text-center text-xs text-purple-200/50 space-y-1">
+      <p>Dynamax Trails Special Background Tracker • All 57 Max Battle Event Pokémon</p>
+      <p>Progress is saved automatically on your device via browser local storage.</p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-200">
+    <div class="px-4 py-2.5 rounded-xl bg-slate-900/95 border border-pink-500/50 text-white text-xs sm:text-sm font-medium shadow-2xl flex items-center gap-2 backdrop-blur-md">
+      <span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>
+      <span id="toastMessage">Saved!</span>
+    </div>
+  </div>
+
+  <!-- Backup / Transfer Modal -->
+  <div id="backupModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-2xl bg-slate-900 border border-purple-500/30 p-5 sm:p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="font-display text-lg sm:text-xl font-bold text-white">Backup / Transfer Save Code</h2>
+        <button id="closeBackupBtn" type="button" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-400">
+        Copy your personal save code to transfer your checklist progress to another phone or browser, or paste an existing code below.
+      </p>
+
+      <!-- Export Section -->
+      <div class="space-y-1.5">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-purple-300">Your Current Save Code</label>
+        <div class="flex gap-2">
+          <input id="exportCodeInput" type="text" readonly
+            class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs font-mono text-pink-300 select-all outline-none" />
+          <button id="copyCodeBtn" type="button"
+            class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-semibold shrink-0 transition cursor-pointer">
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- Import Section -->
+      <div class="space-y-1.5 pt-2 border-t border-slate-800">
+        <label for="importCodeInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">Restore from Save Code</label>
+        <div class="flex gap-2">
+          <input id="importCodeInput" type="text" placeholder="Paste save code here..."
+            class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 focus:border-pink-500 text-xs font-mono text-white placeholder-slate-600 outline-none" />
+          <button id="importCodeBtn" type="button"
+            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 text-xs font-semibold shrink-0 transition cursor-pointer">
+            Load
+          </button>
+        </div>
+        <p id="importErrorMsg" class="hidden text-xs text-rose-400 mt-1">Invalid save code. Please double-check and try again.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Reset Confirmation Modal (No browser confirm()) -->
+  <div id="resetModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-sm rounded-2xl bg-slate-900 border border-rose-500/35 p-5 sm:p-6 shadow-2xl space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-rose-950 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-display text-lg font-bold text-white">Reset Checklist?</h3>
+          <p class="text-xs text-slate-400">This will uncheck all 57 Pokémon on this device.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button id="cancelResetBtn" type="button"
+          class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium transition cursor-pointer">
+          Cancel
+        </button>
+        <button id="confirmResetBtn" type="button"
+          class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-semibold transition cursor-pointer">
+          Yes, Reset All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Android / Mobile "Add to Home Screen" Install Guide Modal -->
+  <div id="installGuideModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-2xl bg-slate-900 border border-pink-500/35 p-5 sm:p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 shrink-0">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-display text-lg font-bold text-white leading-tight">Add to Phone Home Screen</h2>
+            <p class="text-[11px] text-pink-300">Launch full-screen like a native app</p>
+          </div>
+        </div>
+        <button id="closeInstallGuideBtn" type="button" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 cursor-pointer">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+        <div class="rounded-xl bg-slate-950/90 border border-purple-500/25 p-3.5 space-y-2">
+          <p class="font-semibold text-purple-200 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Android (Chrome / Edge / Samsung Internet)
+          </p>
+          <ol class="list-decimal list-inside space-y-1.5 text-slate-300 text-xs">
+            <li>Tap the <strong class="text-white">⋮</strong> menu button in the top-right corner of Chrome.</li>
+            <li>Tap <strong class="text-pink-300">Add to Home screen</strong> or <strong class="text-pink-300">Install app</strong>.</li>
+            <li>Confirm by tapping <strong class="text-white">Install</strong> — it will appear on your home screen with its own Dynamax icon!</li>
+          </ol>
+        </div>
+
+        <div class="rounded-xl bg-slate-950/70 border border-slate-800 p-3 space-y-1.5">
+          <p class="font-semibold text-slate-200 text-xs">iPhone / iPad (Safari)</p>
+          <p class="text-xs text-slate-400">
+            Tap the <strong class="text-white">Share</strong> icon at the bottom of Safari, then select <strong class="text-pink-300">Add to Home Screen</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-1">
+        <button id="doneInstallGuideBtn" type="button"
+          class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-semibold transition cursor-pointer">
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Complete Roster of all 57 Dynamax Pokémon featured in Dynamax Trails (Nov 16–23, 2026)
+     * Each entry has:
+     *  - uid: Unique string key used in localStorage (handles alternate forms like Low Key Toxtricity cleanly)
+     *  - dex: National Pokédex number for display
+     *  - spriteId: PokeAPI ID for fetching official artwork
+     *  - name: Pokémon display name
+     *  - gen: Region / Generation name for filtering
+     *  - cp100: Level 20 100% IV CP from Max Battles
+     */
+    const POKEMON_ROSTER = [
+      // Kanto (20)
+      { uid: '001', dex: 1, spriteId: 1, name: 'Bulbasaur', gen: 'Kanto', cp100: 637 },
+      { uid: '004', dex: 4, spriteId: 4, name: 'Charmander', gen: 'Kanto', cp100: 560 },
+      { uid: '007', dex: 7, spriteId: 7, name: 'Squirtle', gen: 'Kanto', cp100: 540 },
+      { uid: '010', dex: 10, spriteId: 10, name: 'Caterpie', gen: 'Kanto', cp100: 249 },
+      { uid: '025', dex: 25, spriteId: 25, name: 'Pikachu', gen: 'Kanto', cp100: 536 },
+      { uid: '058', dex: 58, spriteId: 58, name: 'Growlithe', gen: 'Kanto', cp100: 710 },
+      { uid: '063', dex: 63, spriteId: 63, name: 'Abra', gen: 'Kanto', cp100: 767 },
+      { uid: '066', dex: 66, spriteId: 66, name: 'Machop', gen: 'Kanto', cp100: 730 },
+      { uid: '092', dex: 92, spriteId: 92, name: 'Gastly', gen: 'Kanto', cp100: 702 },
+      { uid: '098', dex: 98, spriteId: 98, name: 'Krabby', gen: 'Kanto', cp100: 892 },
+      { uid: '106', dex: 106, spriteId: 106, name: 'Hitmonlee', gen: 'Kanto', cp100: 1472 },
+      { uid: '107', dex: 107, spriteId: 107, name: 'Hitmonchan', gen: 'Kanto', cp100: 1332 },
+      { uid: '111', dex: 111, spriteId: 111, name: 'Rhyhorn', gen: 'Kanto', cp100: 943 },
+      { uid: '113', dex: 113, spriteId: 113, name: 'Chansey', gen: 'Kanto', cp100: 717 },
+      { uid: '125', dex: 125, spriteId: 125, name: 'Electabuzz', gen: 'Kanto', cp100: 1333 },
+      { uid: '126', dex: 126, spriteId: 126, name: 'Magmar', gen: 'Kanto', cp100: 1367 },
+      { uid: '129', dex: 129, spriteId: 129, name: 'Magikarp', gen: 'Kanto', cp100: 157 },
+      { uid: '133', dex: 133, spriteId: 133, name: 'Eevee', gen: 'Kanto', cp100: 612 },
+      { uid: '138', dex: 138, spriteId: 138, name: 'Omanyte', gen: 'Kanto', cp100: 882 },
+      { uid: '140', dex: 140, spriteId: 140, name: 'Kabuto', gen: 'Kanto', cp100: 783 },
+
+      // Johto (4)
+      { uid: '163', dex: 163, spriteId: 163, name: 'Hoothoot', gen: 'Johto', cp100: 387 },
+      { uid: '213', dex: 213, spriteId: 213, name: 'Shuckle', gen: 'Johto', cp100: 231 },
+      { uid: '215', dex: 215, spriteId: 215, name: 'Sneasel', gen: 'Johto', cp100: 1172 },
+      { uid: '237', dex: 237, spriteId: 237, name: 'Hitmontop', gen: 'Johto', cp100: 1232 },
+
+      // Hoenn (7)
+      { uid: '280', dex: 280, spriteId: 280, name: 'Ralts', gen: 'Hoenn', cp100: 308 },
+      { uid: '302', dex: 302, spriteId: 302, name: 'Sableye', gen: 'Hoenn', cp100: 843 },
+      { uid: '320', dex: 320, spriteId: 320, name: 'Wailmer', gen: 'Hoenn', cp100: 838 },
+      { uid: '328', dex: 328, spriteId: 328, name: 'Trapinch', gen: 'Hoenn', cp100: 728 },
+      { uid: '349', dex: 349, spriteId: 349, name: 'Feebas', gen: 'Hoenn', cp100: 157 },
+      { uid: '363', dex: 363, spriteId: 363, name: 'Spheal', gen: 'Hoenn', cp100: 550 },
+      { uid: '374', dex: 374, spriteId: 374, name: 'Beldum', gen: 'Hoenn', cp100: 558 },
+
+      // Sinnoh (1)
+      { uid: '415', dex: 415, spriteId: 415, name: 'Combee', gen: 'Sinnoh', cp100: 282 },
+
+      // Unova (9)
+      { uid: '519', dex: 519, spriteId: 519, name: 'Pidove', gen: 'Unova', cp100: 484 },
+      { uid: '524', dex: 524, spriteId: 524, name: 'Roggenrola', gen: 'Unova', cp100: 688 },
+      { uid: '527', dex: 527, spriteId: 527, name: 'Woobat', gen: 'Unova', cp100: 580 },
+      { uid: '529', dex: 529, spriteId: 529, name: 'Drilbur', gen: 'Unova', cp100: 786 },
+      { uid: '546', dex: 546, spriteId: 546, name: 'Cottonee', gen: 'Unova', cp100: 400 },
+      { uid: '554', dex: 554, spriteId: 554, name: 'Darumaka', gen: 'Unova', cp100: 823 },
+      { uid: '568', dex: 568, spriteId: 568, name: 'Trubbish', gen: 'Unova', cp100: 571 },
+      { uid: '615', dex: 615, spriteId: 615, name: 'Cryogonal', gen: 'Unova', cp100: 1598 },
+      { uid: '633', dex: 633, spriteId: 633, name: 'Deino', gen: 'Unova', cp100: 606 },
+
+      // Kalos (1)
+      { uid: '686', dex: 686, spriteId: 686, name: 'Inkay', gen: 'Kalos', cp100: 529 },
+
+      // Alola (3)
+      { uid: '761', dex: 761, spriteId: 761, name: 'Bounsweet', gen: 'Alola', cp100: 268 },
+      { uid: '766', dex: 766, spriteId: 766, name: 'Passimian', gen: 'Alola', cp100: 1733 },
+      { uid: '780', dex: 780, spriteId: 780, name: 'Drampa', gen: 'Alola', cp100: 1665 },
+
+      // Galar (12)
+      { uid: '810', dex: 810, spriteId: 810, name: 'Grookey', gen: 'Galar', cp100: 620 },
+      { uid: '813', dex: 813, spriteId: 813, name: 'Scorbunny', gen: 'Galar', cp100: 627 },
+      { uid: '816', dex: 816, spriteId: 816, name: 'Sobble', gen: 'Galar', cp100: 627 },
+      { uid: '819', dex: 819, spriteId: 819, name: 'Skwovet', gen: 'Galar', cp100: 539 },
+      { uid: '821', dex: 821, spriteId: 821, name: 'Rookidee', gen: 'Galar', cp100: 380 },
+      { uid: '831', dex: 831, spriteId: 831, name: 'Wooloo', gen: 'Galar', cp100: 403 },
+      { uid: '849-amped', dex: 849, spriteId: 849, name: 'Toxtricity (Amped Form)', gen: 'Galar', cp100: 1486 },
+      { uid: '849-lowkey', dex: 849, spriteId: 10184, name: 'Toxtricity (Low Key Form)', gen: 'Galar', cp100: 1486 },
+      { uid: '850', dex: 850, spriteId: 850, name: 'Sizzlipede', gen: 'Galar', cp100: 599 },
+      { uid: '856', dex: 856, spriteId: 856, name: 'Hatenna', gen: 'Galar', cp100: 492 },
+      { uid: '870', dex: 870, spriteId: 870, name: 'Falinks', gen: 'Galar', cp100: 1347 },
+      { uid: '884', dex: 884, spriteId: 884, name: 'Duraludon', gen: 'Galar', cp100: 1753 }
+    ];
+
+    const STORAGE_KEY = 'dynamax_trails_bg_checklist_v1';
+
+    // Application State
+    let collectedSet = new Set();
+    let isCollectedCollapsed = false;
+    let lastMovedUid = null;
+    let toastTimeout = null;
+    let deferredInstallPrompt = null;
+
+    /**
+     * Dynamically generate an SVG App Icon + Web App Manifest so Android Chrome
+     * recognizes this single-file page as an installable standalone app ("Add to Home screen" / "Install app")
+     */
+    function setupInstallablePWA() {
+      const iconSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <defs>
+            <radialGradient id="dmaxSky" cx="50%" cy="35%" r="70%">
+              <stop offset="0%" stop-color="#e6249c"/>
+              <stop offset="50%" stop-color="#6d12d6"/>
+              <stop offset="100%" stop-color="#090712"/>
+            </radialGradient>
+            <linearGradient id="swirlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff7ce5"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+          <rect width="512" height="512" rx="112" fill="url(#dmaxSky)"/>
+          <circle cx="256" cy="256" r="168" fill="none" stroke="url(#swirlGrad)" stroke-width="26" stroke-dasharray="260 95" stroke-linecap="round"/>
+          <circle cx="256" cy="256" r="108" fill="none" stroke="#fbcfe8" stroke-width="20" stroke-dasharray="170 70" stroke-linecap="round"/>
+          <circle cx="256" cy="256" r="44" fill="#ff47b6"/>
+        </svg>
+      `.trim();
+
+      const iconDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(iconSvg);
+      const appIconLink = document.getElementById('appIconLink');
+      const appleTouchIconLink = document.getElementById('appleTouchIconLink');
+      if (appIconLink) appIconLink.href = iconDataUrl;
+      if (appleTouchIconLink) appleTouchIconLink.href = iconDataUrl;
+
+      // Build dynamic Web App Manifest Blob for Android Chrome
+      try {
+        const startUrl = window.location.href.split('#')[0];
+        const manifest = {
+          name: 'Dynamax Trails — Special BG Checklist',
+          short_name: 'Dynamax BG',
+          description: 'Track your Dynamax Trails Special Background Pokémon catches.',
+          start_url: startUrl,
+          scope: './',
+          display: 'standalone',
+          orientation: 'portrait',
+          background_color: '#090712',
+          theme_color: '#120829',
+          icons: [
+            {
+              src: iconDataUrl,
+              sizes: '192x192 512x512',
+              type: 'image/svg+xml',
+              purpose: 'any maskable'
+            }
+          ]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+        const manifestUrl = URL.createObjectURL(manifestBlob);
+        const manifestLink = document.getElementById('dynamicManifest');
+        if (manifestLink) manifestLink.href = manifestUrl;
+      } catch (err) {
+        console.warn('Could not attach dynamic web manifest:', err);
+      }
+
+      // Listen for Android Chrome's native beforeinstallprompt event
+      const installAppBtn = document.getElementById('installAppBtn');
+      const installAppBtnLabel = document.getElementById('installAppBtnLabel');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        if (installAppBtnLabel) {
+          installAppBtnLabel.textContent = 'Install App';
+        }
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        if (installAppBtn) {
+          installAppBtn.classList.add('hidden');
+        }
+        showToast('App installed to your home screen!');
+      });
+
+      // Hide install button if already running inside the installed standalone app
+      if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+        if (installAppBtn) installAppBtn.classList.add('hidden');
+      }
+    }
+
+    // DOM Elements
+    const neededList = document.getElementById('neededList');
+    const neededSectionBadge = document.getElementById('neededSectionBadge');
+    const allCollectedBanner = document.getElementById('allCollectedBanner');
+
+    const collectedList = document.getElementById('collectedList');
+    const collectedSectionBadge = document.getElementById('collectedSectionBadge');
+    const noCollectedPlaceholder = document.getElementById('noCollectedPlaceholder');
+    const toggleCollectedCollapseBtn = document.getElementById('toggleCollectedCollapseBtn');
+    const collectedChevron = document.getElementById('collectedChevron');
+
+    const progressText = document.getElementById('progressText');
+    const progressBarFill = document.getElementById('progressBarFill');
+    const completeBadge = document.getElementById('completeBadge');
+
+    /**
+     * Load saved checklist state from localStorage
+     */
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            const validUids = new Set(POKEMON_ROSTER.map(p => p.uid));
+            collectedSet = new Set(parsed.filter(uid => validUids.has(uid)));
+          }
+        }
+      } catch (err) {
+        console.warn('Could not load saved checklist progress:', err);
+      }
+    }
+
+    /**
+     * Persist checklist state to localStorage
+     */
+    function saveProgress() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...collectedSet]));
+      } catch (err) {
+        console.warn('Could not save checklist progress:', err);
+      }
+    }
+
+    /**
+     * Format National Dex number (e.g., #001)
+     */
+    function formatDex(dex) {
+      return '#' + String(dex).padStart(3, '0');
+    }
+
+    /**
+     * Display a temporary toast notification
+     */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-3');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2400);
+    }
+
+    /**
+     * Update top progress bar
+     */
+    function updateStats() {
+      const total = POKEMON_ROSTER.length;
+      const collected = collectedSet.size;
+      const pct = Math.round((collected / total) * 100);
+
+      progressText.textContent = `${collected} / ${total} Collected (${pct}%)`;
+      progressBarFill.style.width = `${pct}%`;
+
+      if (collected === total) {
+        completeBadge.classList.remove('hidden');
+      } else {
+        completeBadge.classList.add('hidden');
+      }
+    }
+
+    /**
+     * Toggle collected state for a specific Pokémon UID with smooth slide transition
+     * into either "Still Needed" or "Collected — Special Background"
+     */
+    function togglePokemon(uid) {
+      const rowEl = document.querySelector(`[data-uid="${uid}"]`);
+      const willBeCollected = !collectedSet.has(uid);
+
+      if (willBeCollected) {
+        collectedSet.add(uid);
+      } else {
+        collectedSet.delete(uid);
+      }
+
+      lastMovedUid = uid;
+      saveProgress();
+      updateStats();
+
+      // If Collected section was collapsed and user just collected one, auto-expand so they see it land
+      if (willBeCollected && isCollectedCollapsed) {
+        isCollectedCollapsed = false;
+        collectedChevron.classList.remove('-rotate-90');
+        toggleCollectedCollapseBtn.setAttribute('aria-expanded', 'true');
+      }
+
+      if (rowEl) {
+        rowEl.classList.add('row-exiting');
+        setTimeout(() => {
+          renderLists();
+        }, 175);
+      } else {
+        renderLists();
+      }
+    }
+
+    /**
+     * Parse Pokémon display name into main title + optional form subtitle (e.g., Amped Form / Low Key Form)
+     */
+    function parsePokemonDisplay(name) {
+      const match = name.match(/^(.+?)\s*\((.+)\)$/);
+      if (match) {
+        return { baseName: match[1], formLabel: match[2] };
+      }
+      return { baseName: name, formLabel: null };
+    }
+
+    /**
+     * Build HTML string for a single horizontal list row
+     */
+    function buildRowHTML(p, isCollected) {
+      const primaryArtwork = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.spriteId}.png`;
+      const fallbackSprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.spriteId}.png`;
+      const { baseName, formLabel } = parsePokemonDisplay(p.name);
+      const animateEnter = lastMovedUid === p.uid ? 'row-enter' : '';
+
+      return `
+        <button type="button"
+          data-uid="${p.uid}"
+          aria-pressed="${isCollected}"
+          class="pokemon-row ${animateEnter} group w-full rounded-2xl border p-2 sm:p-2.5 backdrop-blur-md transition-all duration-200 flex items-center gap-3 sm:gap-4 text-left select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-400 ${
+            isCollected
+              ? 'bg-gradient-to-r from-[#230e42]/90 via-[#1a0d36]/90 to-[#130a28]/85 border-pink-400/55 hover:border-pink-300 shadow-[0_6px_24px_-6px_rgba(219,39,119,0.45)]'
+              : 'bg-[#120929]/75 hover:bg-[#1a0e38]/85 border-purple-400/20 hover:border-purple-400/50 shadow-[0_4px_16px_-6px_rgba(0,0,0,0.6)]'
+          }">
+
+          <!-- Left: Framed Pokémon + Special Background Artwork Thumbnail -->
+          <div class="relative w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-xl overflow-hidden shrink-0 border transition-all duration-300 ${
+            isCollected
+              ? 'border-pink-400/85 collected-card-shadow'
+              : 'border-purple-400/25 bg-[#090417]'
+          }">
+            <!-- Unchecked Subtle Purple-Tinted Dark Backdrop -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#1a0d38]/60 via-[#0d0621] to-[#05020d]"></div>
+
+            <!-- Checked Vivid Dynamax Storm Cloud Background + Black Ground Horizon -->
+            <div class="absolute inset-0 dynamax-bg-art transition-opacity duration-300 ${
+              isCollected ? 'opacity-100' : 'opacity-0'
+            }"></div>
+            <div class="absolute inset-0 dynamax-clouds-overlay transition-opacity duration-300 ${
+              isCollected ? 'opacity-100' : 'opacity-0'
+            }"></div>
+
+            <!-- Pokémon Official Artwork Sprite -->
+            <img
+              src="${primaryArtwork}"
+              onerror="this.onerror=null; this.src='${fallbackSprite}';"
+              alt="${p.name}"
+              loading="lazy"
+              class="relative z-10 w-full h-full object-contain p-1 transition-all duration-300 pointer-events-none ${
+                isCollected ? 'sprite-active' : 'sprite-muted'
+              }"
+            />
+          </div>
+
+          <!-- Center: Dex #, Name, Form Badge, Region & Status -->
+          <div class="flex-1 min-w-0 py-0.5">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded bg-black/60 text-purple-200 border border-purple-400/25">
+                ${formatDex(p.dex)}
+              </span>
+              <span class="text-[11px] font-medium px-2 py-0.5 rounded bg-purple-950/65 text-purple-300/80 border border-purple-500/20">
+                ${p.gen}
+              </span>
+              ${
+                formLabel
+                  ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-fuchsia-950/85 text-pink-200 border border-pink-500/40">
+                       ${formLabel}
+                     </span>`
+                  : ''
+              }
+            </div>
+
+            <div class="mt-1 flex items-center gap-2">
+              <span class="font-bold text-base sm:text-lg leading-snug truncate ${
+                isCollected ? 'text-white' : 'text-slate-100'
+              }">
+                ${baseName}
+              </span>
+            </div>
+
+            <div class="mt-1 flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1 text-[11px] font-mono font-semibold px-2 py-0.5 rounded-md bg-amber-950/80 text-amber-200 border border-amber-500/35" title="Level 20 100% IV CP">
+                <span class="text-amber-400 font-sans font-bold text-[10px]">100% CP</span>
+                <span>${p.cp100}</span>
+              </span>
+              ${
+                isCollected
+                  ? `<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-pink-300">
+                       <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
+                       Special BG Obtained
+                     </span>`
+                  : `<span class="inline-flex items-center gap-1 text-[11px] font-medium text-purple-200/55">
+                       <span class="w-1.5 h-1.5 rounded-full bg-purple-400/45"></span>
+                       No Background
+                     </span>`
+              }
+            </div>
+          </div>
+
+          <!-- Right: Tactile Checkbox / Status Toggle Pill -->
+          <div class="shrink-0 flex items-center gap-2 pr-1">
+            <span class="hidden sm:inline-block text-xs font-semibold px-2.5 py-1 rounded-lg border transition-colors ${
+              isCollected
+                ? 'bg-pink-950/85 text-pink-200 border-pink-400/45'
+                : 'bg-black/45 text-purple-200/75 border-purple-400/25 group-hover:border-purple-400/50 group-hover:text-white'
+            }">
+              ${isCollected ? 'Collected' : 'Mark BG'}
+            </span>
+
+            <span class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex items-center justify-center transition-all duration-200 ${
+              isCollected
+                ? 'bg-gradient-to-br from-pink-500 to-purple-600 border-pink-200 text-white shadow-lg shadow-pink-500/45'
+                : 'bg-black/55 border-purple-400/30 text-purple-300/40 group-hover:border-pink-400/60'
+            }">
+              ${
+                isCollected
+                  ? `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                     </svg>`
+                  : `<svg class="w-4 h-4 opacity-0 group-hover:opacity-70 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                       <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                     </svg>`
+              }
+            </span>
+          </div>
+        </button>
+      `;
+    }
+
+    /**
+     * Render "Still Needed" and "Collected — Special Background" list sections
+     */
+    function renderLists() {
+      const uncollectedItems = POKEMON_ROSTER.filter(p => !collectedSet.has(p.uid));
+      const collectedItems = POKEMON_ROSTER.filter(p => collectedSet.has(p.uid));
+
+      // Render Section 1: Still Needed
+      neededSectionBadge.textContent = `${uncollectedItems.length} remaining`;
+      if (uncollectedItems.length === 0) {
+        neededList.innerHTML = '';
+        allCollectedBanner.classList.remove('hidden');
+      } else {
+        allCollectedBanner.classList.add('hidden');
+        neededList.innerHTML = uncollectedItems.map(p => buildRowHTML(p, false)).join('');
+      }
+
+      // Render Section 2: Collected — Special Background (at the bottom of the page)
+      collectedSectionBadge.textContent = `${collectedItems.length} collected`;
+      if (isCollectedCollapsed) {
+        collectedList.classList.add('hidden');
+        noCollectedPlaceholder.classList.add('hidden');
+      } else {
+        collectedList.classList.remove('hidden');
+        if (collectedItems.length === 0) {
+          collectedList.innerHTML = '';
+          noCollectedPlaceholder.classList.remove('hidden');
+        } else {
+          noCollectedPlaceholder.classList.add('hidden');
+          collectedList.innerHTML = collectedItems.map(p => buildRowHTML(p, true)).join('');
+        }
+      }
+
+      // Clear animation marker after render
+      lastMovedUid = null;
+
+      // Attach click handlers to all visible rows
+      document.querySelectorAll('.pokemon-row').forEach(row => {
+        row.addEventListener('click', () => {
+          togglePokemon(row.dataset.uid);
+        });
+      });
+    }
+
+    /**
+     * Generate a compact save string representing a 57-bit bitmask of collected Pokémon
+     */
+    function generateSaveCode() {
+      // Build 57-character binary string in roster order
+      const bits = POKEMON_ROSTER.map(p => (collectedSet.has(p.uid) ? '1' : '0')).join('');
+      // Pack into hex string for ultra-compact sharing
+      let hex = '';
+      for (let i = 0; i < bits.length; i += 4) {
+        const chunk = bits.slice(i, i + 4).padEnd(4, '0');
+        hex += parseInt(chunk, 2).toString(16);
+      }
+      return 'DMAX1-' + hex.toUpperCase();
+    }
+
+    /**
+     * Parse and apply a compact save code
+     */
+    function applySaveCode(code) {
+      const cleaned = code.trim().toUpperCase();
+      if (!cleaned.startsWith('DMAX1-')) return false;
+      const hex = cleaned.slice(6);
+      const expectedHexLen = Math.ceil(POKEMON_ROSTER.length / 4);
+      if (hex.length !== expectedHexLen || !/^[0-9A-F]+$/.test(hex)) return false;
+
+      let bits = '';
+      for (let i = 0; i < hex.length; i++) {
+        bits += parseInt(hex[i], 16).toString(2).padStart(4, '0');
+      }
+
+      const nextSet = new Set();
+      POKEMON_ROSTER.forEach((p, idx) => {
+        if (bits[idx] === '1') {
+          nextSet.add(p.uid);
+        }
+      });
+
+      collectedSet = nextSet;
+      saveProgress();
+      updateStats();
+      renderLists();
+      return true;
+    }
+
+    // Event Listeners Setup
+    function initEventListeners() {
+      // Collapse/Expand Collected section
+      toggleCollectedCollapseBtn.addEventListener('click', () => {
+        isCollectedCollapsed = !isCollectedCollapsed;
+        toggleCollectedCollapseBtn.setAttribute('aria-expanded', String(!isCollectedCollapsed));
+        if (isCollectedCollapsed) {
+          collectedChevron.classList.add('-rotate-90');
+        } else {
+          collectedChevron.classList.remove('-rotate-90');
+        }
+        renderLists();
+      });
+
+      // Backup Modal Controls
+      const backupModal = document.getElementById('backupModal');
+      const exportCodeInput = document.getElementById('exportCodeInput');
+      const importCodeInput = document.getElementById('importCodeInput');
+      const importErrorMsg = document.getElementById('importErrorMsg');
+
+      document.getElementById('openBackupBtn').addEventListener('click', () => {
+        exportCodeInput.value = generateSaveCode();
+        importCodeInput.value = '';
+        importErrorMsg.classList.add('hidden');
+        backupModal.classList.remove('hidden');
+        backupModal.classList.add('flex');
+      });
+
+      document.getElementById('closeBackupBtn').addEventListener('click', () => {
+        backupModal.classList.add('hidden');
+        backupModal.classList.remove('flex');
+      });
+
+      backupModal.addEventListener('click', e => {
+        if (e.target === backupModal) {
+          backupModal.classList.add('hidden');
+          backupModal.classList.remove('flex');
+        }
+      });
+
+      document.getElementById('copyCodeBtn').addEventListener('click', () => {
+        exportCodeInput.select();
+        exportCodeInput.setSelectionRange(0, 99999);
+        try {
+          document.execCommand('copy');
+          showToast('Save code copied to clipboard!');
+        } catch (err) {
+          showToast('Select the code and press Ctrl+C / Copy.');
+        }
+      });
+
+      document.getElementById('importCodeBtn').addEventListener('click', () => {
+        const success = applySaveCode(importCodeInput.value);
+        if (success) {
+          importErrorMsg.classList.add('hidden');
+          exportCodeInput.value = generateSaveCode();
+          backupModal.classList.add('hidden');
+          backupModal.classList.remove('flex');
+          showToast(`Loaded progress (${collectedSet.size} / ${POKEMON_ROSTER.length})!`);
+        } else {
+          importErrorMsg.classList.remove('hidden');
+        }
+      });
+
+      // Reset Confirmation Modal Controls
+      const resetModal = document.getElementById('resetModal');
+
+      document.getElementById('openResetBtn').addEventListener('click', () => {
+        resetModal.classList.remove('hidden');
+        resetModal.classList.add('flex');
+      });
+
+      document.getElementById('cancelResetBtn').addEventListener('click', () => {
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+      });
+
+      resetModal.addEventListener('click', e => {
+        if (e.target === resetModal) {
+          resetModal.classList.add('hidden');
+          resetModal.classList.remove('flex');
+        }
+      });
+
+      document.getElementById('confirmResetBtn').addEventListener('click', () => {
+        collectedSet.clear();
+        saveProgress();
+        updateStats();
+        renderLists();
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+        showToast('Checklist has been reset.');
+      });
+
+      // Install App / Add to Home Screen Controls
+      const installAppBtn = document.getElementById('installAppBtn');
+      const installGuideModal = document.getElementById('installGuideModal');
+      const closeInstallGuideBtn = document.getElementById('closeInstallGuideBtn');
+      const doneInstallGuideBtn = document.getElementById('doneInstallGuideBtn');
+
+      const closeInstallGuide = () => {
+        installGuideModal.classList.add('hidden');
+        installGuideModal.classList.remove('flex');
+      };
+
+      installAppBtn.addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === 'accepted') {
+            deferredInstallPrompt = null;
+          }
+        } else {
+          installGuideModal.classList.remove('hidden');
+          installGuideModal.classList.add('flex');
+        }
+      });
+
+      closeInstallGuideBtn.addEventListener('click', closeInstallGuide);
+      doneInstallGuideBtn.addEventListener('click', closeInstallGuide);
+      installGuideModal.addEventListener('click', e => {
+        if (e.target === installGuideModal) closeInstallGuide();
+      });
+    }
+
+    // Initialize Application
+    window.addEventListener('DOMContentLoaded', () => {
+      setupInstallablePWA();
+      loadProgress();
+      updateStats();
+      renderLists();
+      initEventListeners();
+    });
+  </script>
+</body>
+</html>
